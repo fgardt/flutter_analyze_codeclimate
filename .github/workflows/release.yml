@@ -1,0 +1,56 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-release:
+    name: Build release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Stable rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          target: arm-unknown-linux-gnueabihf
+          toolchain: stable
+          profile: minimal
+          override: true
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+      - name: Save binary artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: binary
+          path: target/release/flutter_analyze_codeclimate
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: ["build-release"]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get binary artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: binary
+          path: target/release/
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/release/flutter_analyze_codeclimate

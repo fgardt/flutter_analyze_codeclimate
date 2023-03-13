@@ -1,0 +1,16 @@
+[package]
+name = "flutter_analyze_codeclimate"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Florian Gebhardt"]
+about = "A small utility tool to convert flutter analyze output to the codeclimate format to use as a gitlab CI artifact."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.1.8", features = ["derive"] }
+md5 = "0.7.0"
+regex = "1.7.1"
+serde = { version = "1.0.155", features = ["derive"] }
+serde_json = "1.0.94"

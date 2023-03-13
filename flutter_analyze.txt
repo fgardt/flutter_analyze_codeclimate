@@ -1,0 +1,2 @@
+[error] Expected to find ';' (/home/flo/dev-awp/sensing-plugin/lib/src/sensor_manager.dart:8:30)
+[info] Avoid lines longer than 80 characters (/home/flo/dev-awp/sensing-plugin/lib/src/sensor_manager.dart:5:81)
