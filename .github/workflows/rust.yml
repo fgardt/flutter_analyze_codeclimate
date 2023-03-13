@@ -19,19 +19,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Stable rust toolchain
-        uses: actions-rs/toolchain@v1
+      - name: Stable rust toolchain with rustfmt
+        uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - name: Add Rustfmt
-        run: rustup component add rustfmt
+          components: rustfmt
       - name: Check formatting
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+        run: cargo fmt --all -- --check
 
   build:
     name: Build
@@ -41,16 +34,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Stable rust toolchain
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          override: true
+          targets: x86_64-unknown-linux-musl
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
       - name: Build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
+        run: cargo build --target x86_64-unknown-linux-musl
 
   test:
     name: Run tests
@@ -60,17 +50,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Stable rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+        uses: dtolnay/rust-toolchain@stable
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
       - name: Run tests
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+        run: cargo test
 
   clippy:
     name: Clippy
@@ -79,14 +63,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Stable rust toolchain
-        uses: actions-rs/toolchain@v1
+      - name: Stable rust toolchain with clippy
+        uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      - name: Add Clippy
-        run: rustup component add clippy
+          components: clippy
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
       - name: Install cargo-binstall

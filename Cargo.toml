@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 authors = ["Florian Gebhardt"]
-about = "A small utility tool to convert flutter analyze output to the codeclimate format to use as a gitlab CI artifact."
+description = "A small utility tool to convert flutter analyze output to the codeclimate format to use as a gitlab CI artifact."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
