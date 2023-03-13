@@ -83,7 +83,7 @@ dependencies = [
 
 [[package]]
 name = "flutter_analyze_codeclimate"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "clap",
  "md5",
