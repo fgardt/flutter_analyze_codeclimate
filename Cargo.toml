@@ -12,5 +12,5 @@ description = "A small utility tool to convert flutter analyze output to the cod
 clap = { version = "4.1.8", features = ["derive"] }
 md5 = "0.7.0"
 regex = "1.7.1"
-serde = { version = "1.0.155", features = ["derive"] }
+serde = { version = "1.0.158", features = ["derive"] }
 serde_json = "1.0.94"
