@@ -1,6 +1,6 @@
 [package]
 name = "flutter_analyze_codeclimate"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "MIT"
 authors = ["Florian Gebhardt"]
@@ -9,8 +9,8 @@ description = "A small utility tool to convert flutter analyze output to the cod
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.1.8", features = ["derive"] }
+clap = { version = "4.2.4", features = ["derive"] }
 md5 = "0.7.0"
-regex = "1.7.1"
-serde = { version = "1.0.155", features = ["derive"] }
-serde_json = "1.0.94"
+regex = "1.8.0"
+serde = { version = "1.0.160", features = ["derive"] }
+serde_json = "1.0.96"
