@@ -27,7 +27,7 @@ impl TryFrom<String> for FlutterIssue {
     type Error = ConvertError;
 
     fn try_from(value: String) -> Result<Self, Self::Error> {
-        let re = Regex::new(r"\[(error|warning|info)\]\s(.*)\s\((.*):(\d+):(\d+)\)").unwrap();
+        let re = Regex::new(r"\[(error|warning|info)\]\s(.*(?:\n{2}(?:\n|.+[:.,!?;'])+\n{2})?)\s\((.*):(\d+):(\d+)\)").unwrap();
 
         if !re.is_match(value.as_str()) {
             return Err(ConvertError::InvalidFormatError);

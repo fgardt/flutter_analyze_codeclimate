@@ -29,12 +29,18 @@ fn main() -> io::Result<()> {
     let input_reader = BufReader::new(input_file);
 
     let mut result = Vec::new();
+    let mut current_line: String = "".to_owned();
 
     for line in input_reader.lines() {
-        let source_issue = FlutterIssue::try_from(line?).unwrap();
-        let target_issue = CodeClimateIssue::from(source_issue);
+        current_line += line?.as_str();
+        current_line += "\n";
 
-        result.push(target_issue);
+        if let Ok(source_issue) = FlutterIssue::try_from(current_line.clone()) {
+            let target_issue = CodeClimateIssue::from(source_issue);
+
+            current_line = "".to_owned();
+            result.push(target_issue);
+        }
     }
 
     let mut output_file = File::create(cli.output)?;
